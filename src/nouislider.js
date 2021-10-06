@@ -1,10 +1,8 @@
 import * as noUiSlider from 'nouislider/dist/nouislider';
 import * as wNumb from 'wnumb/wNumb';
 
-const sliderElement = document.querySelector('#slider');
-
-export const createNoUiSliderTemplate = () => {
-    noUiSlider.create(sliderElement, {
+export const createNoUiSliderTemplate = (element) => {
+    noUiSlider.create(element, {
         start: [20, 80],
         tooltips: [true, wNumb({decimals: 1})],
         connect: true,
