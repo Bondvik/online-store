@@ -19,7 +19,7 @@ const estates = [
             "street": "ул.Большая Конюшенная",
             "building": "д.19"
         },
-        "publish-date": "1576773899132",
+        "publishDate": "1576773899132",
         "category": "Недвижимость",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/apt_1_1.png",
@@ -50,7 +50,7 @@ const estates = [
             "street": "ул. Полярная",
             "building": "д.95А"
         },
-        "publish-date": "1557122399389",
+        "publishDate": "1557122399389",
         "category": "Недвижимость",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/apt_4_1.png",
@@ -79,7 +79,7 @@ const estates = [
             "street": "ул. Шахтёров",
             "building": "д.33Б"
         },
-        "publish-date": "1608220822265",
+        "publishDate": "1608220822265",
         "category": "Недвижимость",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/apt_5_1.png",
@@ -112,7 +112,7 @@ const cars = [
             "street": "ул. Одесская",
             "building": "д.22 корпус 4"
         },
-        "publish-date": "1541068467135",
+        "publishDate": "1541068467135",
         "category": "Автомобиль",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/car_1_1.png",
@@ -145,7 +145,7 @@ const cars = [
             "street": "ул. Одесская",
             "building": "д.22 корпус 4"
         },
-        "publish-date": "1589079707835",
+        "publishDate": "1589079707835",
         "category": "Автомобиль",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/car_2_1.png",
@@ -179,7 +179,7 @@ const cars = [
             "street": "ул. Львовская",
             "building": "д.19 корпус 2"
         },
-        "publish-date": "1566579599795",
+        "publishDate": "1566579599795",
         "category": "Автомобиль",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/car_5_1.png",
@@ -212,7 +212,7 @@ const laptops = [
             "street": "ул. Сакко и Ванцетти",
             "building": "д.74"
         },
-        "publish-date": "1578569567046",
+        "publishDate": "1578569567046",
         "category": "Ноутбук",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/laptop_1_1.png",
@@ -244,7 +244,7 @@ const laptops = [
             "street": "ул.Артиллерийская",
             "building": "д.53"
         },
-        "publish-date": "1566890933376",
+        "publishDate": "1566890933376",
         "category": "Ноутбук",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/laptop_2_1.png",
@@ -274,7 +274,7 @@ const laptops = [
             "street": "ул. Берёзовая",
             "building": "д.140"
         },
-        "publish-date": "1595208829319",
+        "publishDate": "1595208829319",
         "category": "Ноутбук",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/laptop_3_1.png",
@@ -311,7 +311,7 @@ const cameras = [
             "street": "ул. Рябиновая",
             "building": "д.13"
         },
-        "publish-date": "1580770800663",
+        "publishDate": "1633626905786",
         "category": "Фотоаппарат",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/cam_1_1.png",
@@ -340,7 +340,7 @@ const cameras = [
             "street": "проспект Победы",
             "building": "д.116"
         },
-        "publish-date": "1558596738466",
+        "publishDate": "1558596738466",
         "category": "Фотоаппарат",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/cam_2_1.png",
@@ -369,7 +369,7 @@ const cameras = [
             "street": "ул. Пархоменко",
             "building": "д.82"
         },
-        "publish-date": "1582638029924",
+        "publishDate": "1582638029924",
         "category": "Фотоаппарат",
         "photos": [
             "https://assets.htmlacademy.ru/content/projects/1-trading-floor/cam_3_1.png",

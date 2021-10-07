@@ -18,9 +18,7 @@ import {createProduct} from "./data";
 
 const PRODUCT_COUNT = 5;
 
-const products = new Array(PRODUCT_COUNT).fill().map(item => createProduct());
-
-console.log(products)
+const products = new Array(PRODUCT_COUNT).fill().map(createProduct);
 
 const render = (container, element, position) => {
     container.insertAdjacentHTML(position, element)
@@ -63,6 +61,6 @@ render(fromElement, createSortingFavoritesTemplate(), RenderPosition.BEFOREEND);
 //Вывод списка товаров
 render(resultsElement, createResultsListTemplate(), RenderPosition.BEFOREEND);
 const resultsListElement = document.querySelector('.results__list');
-for (let i = 0; i < 6; i++) {
-    render(resultsListElement, createProductTemplate(), RenderPosition.BEFOREEND)
+for (let i = 0; i < PRODUCT_COUNT; i++) {
+    render(resultsListElement, createProductTemplate(products[i]), RenderPosition.BEFOREEND)
 }

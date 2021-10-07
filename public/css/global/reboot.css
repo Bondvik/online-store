@@ -82,3 +82,9 @@ button,
 [type="submit"] {
   appearance: none;
 }
+
+.product-image {
+  width: 318px;
+  height: 220px;
+  border-radius: 4px 0 0 4px;
+}

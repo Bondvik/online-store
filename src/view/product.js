@@ -1,4 +1,8 @@
-export const createProductTemplate = () => {
+import {getPublishDate} from "../time";
+export const createProductTemplate = (product) => {
+    const {name, price, address, photos, publishDate} = product;
+    const {city, street} = address;
+    const isPhotos = photos.length > 1 ? `+${photos.length - 1} фото` : '';
     return (
         `<li class="results__item product">
             <button class="product__favourite fav-add" type="button" aria-label="Добавить в избранное">
@@ -7,8 +11,8 @@ export const createProductTemplate = () => {
                 </svg>
             </button>
             <div class="product__image">
-                <div class="product__image-more-photo hidden">+2 фото</div>
-                <img src="img/item1.jpg" srcset="img/item1-2x.jpg 2x" width="318" height="220" alt="Загородный дом с видом на озеро">
+                <div class="product__image-more-photo hidden">${isPhotos}</div>
+                <img src="${photos[0]}" srcset="${photos[0]} 2x" class="product-image" alt="${name}">
                     <div class="product__image-navigation">
                         <span class="product__navigation-item product__navigation-item--active"></span>
                         <span class="product__navigation-item"></span>
@@ -19,11 +23,11 @@ export const createProductTemplate = () => {
             </div>
             <div class="product__content">
                 <h3 class="product__title">
-                    <a href="#">Загородный дом с видом на озеро</a>
+                    <a href="#">${name}</a>
                 </h3>
-                <div class="product__price">3 000 000 ₽</div>
-                <div class="product__address">Приозёрск, улица Прибрежная</div>
-                <div class="product__date">2 часа назад</div>
+                <div class="product__price">${price} ₽</div>
+                <div class="product__address">${city}, ${street}</div>
+                <div class="product__date">${getPublishDate(publishDate)}</div>
             </div>
         </li>`
     )
