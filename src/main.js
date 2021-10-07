@@ -14,6 +14,13 @@ import {createSortingOrderTemplate} from "./view/sorting-order";
 import {createSortingFavoritesTemplate} from "./view/sorting-favorites";
 import {createResultsListTemplate} from "./view/results-list";
 import {createProductTemplate} from "./view/product";
+import {createProduct} from "./data";
+
+const PRODUCT_COUNT = 5;
+
+const products = new Array(PRODUCT_COUNT).fill().map(item => createProduct());
+
+console.log(products)
 
 const render = (container, element, position) => {
     container.insertAdjacentHTML(position, element)
