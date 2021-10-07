@@ -2,11 +2,9 @@ import dayjs from "dayjs";
 const duration = require('dayjs/plugin/duration');
 const relativeTime = require('dayjs/plugin/relativeTime');
 
-const MILLISECONDS = 1000;
 const ONE_DAY = 1;
 const ONE_WEEK_DAYS = 7;
 const ONE_DAY_HOURS = 24;
-const ONE_DAY_SECONDS = 86400;
 
 const getTitleByHours = (number) => {
     if (number === 1 || number === 21) {
