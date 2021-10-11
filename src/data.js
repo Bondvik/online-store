@@ -1,4 +1,4 @@
-import {getRandomNumber} from "./utils";
+import {getRandomNumber} from "./utils/random";
 import {nanoid} from "nanoid";
 
 const estates = [

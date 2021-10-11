@@ -69,4 +69,3 @@ export const getPublishDate = (date) => {
         } ${publishDate.get('years')} года`
     }
 };
-

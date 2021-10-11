@@ -1,5 +1,5 @@
-import {getPublishDate} from "../time";
-import {getPrice} from "../utils";
+import {getPublishDate} from "../utils/date";
+import {getPrice} from "../utils/product";
 
 export const createProductTemplate = (product) => {
     const {name, price, address, photos, publishDate, isFavorite} = product;

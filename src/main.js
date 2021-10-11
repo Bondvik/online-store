@@ -15,7 +15,6 @@ import {createSortingFavoritesTemplate} from "./view/sorting-favorites";
 import {createResultsListTemplate} from "./view/results-list";
 import {createProductTemplate} from "./view/product";
 import {createProduct} from "./data";
-import {sortProducts} from "./utils";
 
 const PRODUCT_COUNT = 5;
 
