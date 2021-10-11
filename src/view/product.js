@@ -1,4 +1,6 @@
 import {getPublishDate} from "../time";
+import {getPrice} from "../utils";
+
 export const createProductTemplate = (product) => {
     const {name, price, address, photos, publishDate} = product;
     const {city, street} = address;
@@ -25,7 +27,7 @@ export const createProductTemplate = (product) => {
                 <h3 class="product__title">
                     <a href="#">${name}</a>
                 </h3>
-                <div class="product__price">${price} ₽</div>
+                <div class="product__price">${getPrice(price)} ₽</div>
                 <div class="product__address">${city}, ${street}</div>
                 <div class="product__date">${getPublishDate(publishDate)}</div>
             </div>
