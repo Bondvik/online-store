@@ -1,4 +1,4 @@
-import {RenderPosition} from "./constants";
+import {RenderPosition, SortLabel} from "./constants";
 import {createAppTemplate} from "./view/app";
 import {createAppFilterTemplate} from "./view/app-filter";
 import {createFilterCategoriesTemplate} from "./view/filter-categories";
@@ -15,6 +15,7 @@ import {createSortingFavoritesTemplate} from "./view/sorting-favorites";
 import {createResultsListTemplate} from "./view/results-list";
 import {createProductTemplate} from "./view/product";
 import {createProduct} from "./data";
+import {sortProducts} from "./utils";
 
 const PRODUCT_COUNT = 5;
 

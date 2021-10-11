@@ -4,3 +4,10 @@ export const RenderPosition = {
     BEFOREEND: 'beforeend',
     AFTEREND:  'afterend'
 }
+
+export const SortLabel = {
+    POPULAR: 'popular',
+    CHEAP: 'cheap',
+    NEW: 'new',
+    FAVORITE: 'favorite'
+}
