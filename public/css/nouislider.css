@@ -20,7 +20,8 @@
 }
 .noUi-base,
 .noUi-connects {
-  width: 100%;
+  margin-left: 50px;
+  margin-right: 50px;
   height: 100%;
   position: relative;
   z-index: 1;
@@ -121,6 +122,8 @@
 }
 .noUi-connects {
   border-radius: 3px;
+  margin-right: 0;
+  margin-left: 0;
 }
 .noUi-connect {
   background: #4456B1;

@@ -43,7 +43,7 @@ render(filterButtonElement, createFilterLaptopTemplate(), RenderPosition.BEFOREB
 render(filterButtonElement, createFilterCarTemplate(), RenderPosition.BEFOREBEGIN);
 
 const sliderElement = document.querySelector('#slider');
-createNoUiSliderTemplate(sliderElement);
+createNoUiSliderTemplate(sliderElement, products);
 
 //Результаты
 const resultsElement = document.querySelector('.onlineshop-app__results');
