@@ -18,10 +18,17 @@ import SortingOrderView from "./view/sorting-order";
 import SortingFavoritesView from "./view/sorting-favorites";
 import ResultsListView from "./view/results-list";
 import ProductView from "./view/product";
+import ProductModalView from "./view/product-modal";
 
 const PRODUCT_COUNT = 5;
 
 const products = new Array(PRODUCT_COUNT).fill().map(createProduct);
+
+const renderProduct = (resultsListElement, product) => {
+    const productComponent = new ProductView(product);
+    const productModalComponent = new ProductModalView(product);
+    render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
+}
 
 const mainElement = document.querySelector('main');
 render(mainElement, new AppView().getElement(), RenderPosition.AFTERBEGIN);
@@ -61,5 +68,5 @@ render(fromElement, new SortingFavoritesView().getElement(), RenderPosition.BEFO
 render(resultsElement, new ResultsListView().getElement(), RenderPosition.BEFOREEND);
 const resultsListElement = document.querySelector('.results__list');
 for (let i = 0; i < PRODUCT_COUNT; i++) {
-    render(resultsListElement, new ProductView(products[i]).getElement(), RenderPosition.BEFOREEND)
+    renderProduct(resultsListElement, products[i]);
 }

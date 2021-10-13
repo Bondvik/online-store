@@ -1,4 +1,6 @@
-export const createProductModalTemplate = () => {
+import {createElement} from "../utils/render";
+
+const createProductModalTemplate = (product) => {
     return (
         `<section class="popup">
             <div class="popup__inner">
@@ -75,4 +77,26 @@ export const createProductModalTemplate = () => {
             </div>
         </section>`
     )
+}
+
+export default class ProductModalView {
+    constructor(product) {
+        this._element = null;
+        this._product = product;
+    }
+
+    getTemplate() {
+        return createProductModalTemplate(this._product);
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }
