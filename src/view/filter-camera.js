@@ -1,4 +1,6 @@
-export const createFilterCameraTemplate = () => {
+import {createElement} from "../utils/render";
+
+const createFilterCameraTemplate = () => {
     return (
         `<div class="filter__camera">
             <fieldset class="filter__type filter__type--camera">
@@ -46,4 +48,25 @@ export const createFilterCameraTemplate = () => {
             </div>
          </div>`
     )
+}
+
+export default class FilterCameraView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilterCameraTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

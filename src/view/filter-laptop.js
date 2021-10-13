@@ -1,4 +1,6 @@
-export const createFilterLaptopTemplate = () => {
+import {createElement} from "../utils/render";
+
+const createFilterLaptopTemplate = () => {
     return (
         `<div class="filter__laptop">
             <fieldset class="filter__type filter__type--laptop">
@@ -83,4 +85,25 @@ export const createFilterLaptopTemplate = () => {
             </fieldset>
         </div>`
     )
+}
+
+export default class FilterLaptopView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilterLaptopTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

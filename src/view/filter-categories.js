@@ -1,4 +1,6 @@
-export const createFilterCategoriesTemplate = () => {
+import {createElement} from "../utils/render";
+
+const createFilterCategoriesTemplate = () => {
     return (
         `<div class="filter__select-wrapper">
             <label for="categories">Категория товаров</label>
@@ -14,4 +16,25 @@ export const createFilterCategoriesTemplate = () => {
             </svg>
         </div>`
     )
+}
+
+export default class FilterCategoriesView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilterCategoriesTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

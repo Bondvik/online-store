@@ -1,6 +1,7 @@
 import {SortLabel} from "../constants";
+import {createElement} from "../utils/render";
 
-export const createSortingFavoritesTemplate = () => {
+const createSortingFavoritesTemplate = () => {
     return (
         `<div class="sorting__favourites">
             <input 
@@ -17,4 +18,25 @@ export const createSortingFavoritesTemplate = () => {
             </label>
         </div>`
     )
+}
+
+export default class SortingFavoritesView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createSortingFavoritesTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

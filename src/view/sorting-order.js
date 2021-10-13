@@ -1,6 +1,7 @@
 import {SortLabel} from "../constants";
+import {createElement} from "../utils/render";
 
-export const createSortingOrderTemplate = () => {
+const createSortingOrderTemplate = () => {
     return (
         `<div class="results__sorting sorting">
             <form class="sorting__form">
@@ -24,4 +25,25 @@ export const createSortingOrderTemplate = () => {
             </form>
         </div>`
     )
+}
+
+export default class SortingOrderView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createSortingOrderTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

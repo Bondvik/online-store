@@ -1,4 +1,6 @@
-export const createFilterCarTemplate = () => {
+import {createElement} from "../utils/render";
+
+const createFilterCarTemplate = () => {
     return (
         `<div class="filter__car">
             <div class="filter__select-wrapper">
@@ -58,4 +60,25 @@ export const createFilterCarTemplate = () => {
             </fieldset>            
         </div>`
     )
+}
+
+export default class FilterCarView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilterCarTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

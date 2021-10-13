@@ -1,7 +1,8 @@
 import {getPublishDate} from "../utils/date";
 import {getPrice} from "../utils/product";
+import {createElement} from "../utils/render";
 
-export const createProductTemplate = (product) => {
+const createProductTemplate = (product) => {
     const {name, price, address, photos, publishDate, isFavorite} = product;
     const {city, street} = address;
     const isPhotos = photos.length > 1 ? `+${photos.length - 1} фото` : '';
@@ -33,4 +34,26 @@ export const createProductTemplate = (product) => {
             </div>
         </li>`
     )
+}
+
+export default class ProductView {
+    constructor(product) {
+        this._element = null;
+        this._product = product;
+    }
+
+    getTemplate() {
+        return createProductTemplate(this._product);
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

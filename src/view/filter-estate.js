@@ -1,4 +1,6 @@
-export const createFilterEstateTemplate = () => {
+import {createElement} from "../utils/render";
+
+const createFilterEstateTemplate = () => {
     return (
         `<div class="filter__estate">
             <fieldset class="filter__type filter__type--estate">
@@ -53,4 +55,25 @@ export const createFilterEstateTemplate = () => {
             </fieldset>
         </div>`
     )
+}
+
+export default class FilterEstateView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilterEstateTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }

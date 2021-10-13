@@ -1,4 +1,6 @@
-export const createFilterRangeTemplate = () => {
+import {createElement} from "../utils/render";
+
+const createFilterRangeTemplate = () => {
     return (
         `<div class="filter__range">
             <label for="range">Цена, ₽</label>
@@ -6,4 +8,25 @@ export const createFilterRangeTemplate = () => {
             <div id="slider"></div>
         </div>`
     )
+}
+
+export default class FilterRangeView {
+    constructor() {
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilterRangeTemplate();
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
 }
