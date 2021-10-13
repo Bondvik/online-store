@@ -7,8 +7,12 @@ export const createNoUiSliderTemplate = (element, products) => {
 
     noUiSlider.create(element, {
         start: [pricesBySort[0], pricesBySort[pricesBySort.length - 1]],
-        tooltips: [true, wNumb({decimals: 1})],
+        tooltips: [true, wNumb({decimals: 0})],
+        step: 1000,
         connect: true,
+        format: wNumb({
+            decimals: 0,
+        }),
         range: {
             'min': pricesBySort[0],
             'max': pricesBySort[pricesBySort.length - 1]
