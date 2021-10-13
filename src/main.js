@@ -1,5 +1,5 @@
 import {RenderPosition} from "./constants";
-import {renderElement, renderTemplate} from "./utils/render";
+import {render} from "./utils/render";
 import {createProduct} from "./data";
 import AppView from "./view/app";
 
@@ -24,22 +24,22 @@ const PRODUCT_COUNT = 5;
 const products = new Array(PRODUCT_COUNT).fill().map(createProduct);
 
 const mainElement = document.querySelector('main');
-renderElement(mainElement, new AppView().getElement(), RenderPosition.AFTERBEGIN);
+render(mainElement, new AppView().getElement(), RenderPosition.AFTERBEGIN);
 
 const appWrapperElement = document.querySelector('.onlineshop-app__wrapper');
-renderElement(appWrapperElement, new AppFilterView().getElement(), RenderPosition.AFTERBEGIN);
-renderElement(appWrapperElement, new AppResultsView().getElement(), RenderPosition.BEFOREEND);
+render(appWrapperElement, new AppFilterView().getElement(), RenderPosition.AFTERBEGIN);
+render(appWrapperElement, new AppResultsView().getElement(), RenderPosition.BEFOREEND);
 
 //Фильтр
 const filterFormElement = document.querySelector('.filter__form');
 const filterButtonElement = filterFormElement.querySelector('.filter__button');
 
-renderTemplate(filterButtonElement, new FilterCategoriesView().getTemplate(), RenderPosition.BEFOREBEGIN);
-renderTemplate(filterButtonElement, new FilterRangeView().getTemplate(), RenderPosition.BEFOREBEGIN);
-renderTemplate(filterButtonElement, new FilterEstateView().getTemplate(), RenderPosition.BEFOREBEGIN);
-renderTemplate(filterButtonElement, new FilterCameraView().getTemplate(), RenderPosition.BEFOREBEGIN);
-renderTemplate(filterButtonElement, new FilterLaptopView().getTemplate(), RenderPosition.BEFOREBEGIN);
-renderTemplate(filterButtonElement, new FilterCarView().getTemplate(), RenderPosition.BEFOREBEGIN);
+render(filterButtonElement, new FilterCategoriesView().getElement(), RenderPosition.BEFOREBEGIN);
+render(filterButtonElement, new FilterRangeView().getElement(), RenderPosition.BEFOREBEGIN);
+render(filterButtonElement, new FilterEstateView().getElement(), RenderPosition.BEFOREBEGIN);
+render(filterButtonElement, new FilterCameraView().getElement(), RenderPosition.BEFOREBEGIN);
+render(filterButtonElement, new FilterLaptopView().getElement(), RenderPosition.BEFOREBEGIN);
+render(filterButtonElement, new FilterCarView().getElement(), RenderPosition.BEFOREBEGIN);
 
 //Ползунок
 const sliderElement = document.querySelector('#slider');
@@ -47,19 +47,19 @@ new NoUiSliderView(sliderElement, products).createSlider();
 
 //Результаты
 const resultsElement = document.querySelector('.onlineshop-app__results');
-renderElement(resultsElement, new ResultsHeadView().getElement(), RenderPosition.AFTERBEGIN);
+render(resultsElement, new ResultsHeadView().getElement(), RenderPosition.AFTERBEGIN);
 
 //Сортировка товаров: Популярные | Дешёвые | Новые
 const resultsHeadElement = document.querySelector('.results__head');
-renderElement(resultsHeadElement, new SortingOrderView().getElement(), RenderPosition.BEFOREEND);
+render(resultsHeadElement, new SortingOrderView().getElement(), RenderPosition.BEFOREEND);
 
 //Сортировка товаров по избранному
 const fromElement = document.querySelector('.sorting__form');
-renderElement(fromElement, new SortingFavoritesView().getElement(), RenderPosition.BEFOREEND);
+render(fromElement, new SortingFavoritesView().getElement(), RenderPosition.BEFOREEND);
 
 //Вывод списка товаров
-renderElement(resultsElement, new ResultsListView().getElement(), RenderPosition.BEFOREEND);
+render(resultsElement, new ResultsListView().getElement(), RenderPosition.BEFOREEND);
 const resultsListElement = document.querySelector('.results__list');
 for (let i = 0; i < PRODUCT_COUNT; i++) {
-    renderElement(resultsListElement, new ProductView(products[i]).getElement(), RenderPosition.BEFOREEND)
+    render(resultsListElement, new ProductView(products[i]).getElement(), RenderPosition.BEFOREEND)
 }
