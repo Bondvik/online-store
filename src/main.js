@@ -31,18 +31,33 @@ const renderProduct = (resultsListElement, product) => {
 
     const productTitleElement = productComponent.getElement().querySelector('.product__title');
     const productImageElement = productComponent.getElement().querySelector('.product__image');
+    const productModalElement = document.querySelector('.popup');
 
     const replaceCardToModal = () => {
-        const productModalElement = document.querySelector('.popup');
         productModalElement.style.display = 'block';
     }
 
+    const replaceModalToCard = () => {
+        productModalElement.style.display = 'none';
+        document.removeEventListener('keydown', onEscKeyDown);
+    }
+
+    const onEscKeyDown = (evt) => {
+        if (evt.key === 'Escape' || evt.key === 'Esc') {
+            evt.preventDefault();
+            replaceModalToCard();
+            document.removeEventListener('keydown', onEscKeyDown);
+        }
+    };
+
     productTitleElement.addEventListener('click', (evt) => {
         replaceCardToModal();
+        document.addEventListener('keydown', onEscKeyDown);
     })
 
     productImageElement.addEventListener('click', (evt) => {
         replaceCardToModal();
+        document.addEventListener('keydown', onEscKeyDown);
     })
 
     render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
