@@ -69,15 +69,40 @@ const renderProduct = (resultsListElement, product) => {
 
     render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
 }
+const renderBoard = (products) => {
+    //Результаты
+    const resultsElement = document.querySelector('.onlineshop-app__results');
+    render(resultsElement, new ResultsHeadView().getElement(), RenderPosition.AFTERBEGIN);
+
+    //Сортировка товаров: Популярные | Дешёвые | Новые
+    const resultsHeadElement = document.querySelector('.results__head');
+    render(resultsHeadElement, new SortingOrderView().getElement(), RenderPosition.BEFOREEND);
+
+    //Сортировка товаров по избранному
+    const fromElement = document.querySelector('.sorting__form');
+    render(fromElement, new SortingFavoritesView().getElement(), RenderPosition.BEFOREEND);
+
+    //Вывод списка товаров
+    render(resultsElement, new ResultsListView().getElement(), RenderPosition.BEFOREEND);
+    const resultsListElement = document.querySelector('.results__list');
+
+    if (products.length === 0) {
+        render(resultsListElement, new NoProductsView().getElement(), RenderPosition.BEFOREEND);
+    } else {
+        for (let i = 0; i < PRODUCT_COUNT; i++) {
+            renderProduct(resultsListElement, products[i]);
+        }
+    }
+}
 
 const mainElement = document.querySelector('main');
 render(mainElement, new AppView().getElement(), RenderPosition.AFTERBEGIN);
 render(mainElement, productModalComponent.getElement(), RenderPosition.BEFOREEND);
 
+
 const appWrapperElement = document.querySelector('.onlineshop-app__wrapper');
 render(appWrapperElement, new AppFilterView().getElement(), RenderPosition.AFTERBEGIN);
 render(appWrapperElement, new AppResultsView().getElement(), RenderPosition.BEFOREEND);
-
 
 //Фильтр
 const filterFormElement = document.querySelector('.filter__form');
@@ -94,26 +119,4 @@ render(filterButtonElement, new FilterCarView().getElement(), RenderPosition.BEF
 const sliderElement = document.querySelector('#slider');
 new NoUiSliderView(sliderElement, products).createSlider();
 
-//Результаты
-const resultsElement = document.querySelector('.onlineshop-app__results');
-render(resultsElement, new ResultsHeadView().getElement(), RenderPosition.AFTERBEGIN);
-
-//Сортировка товаров: Популярные | Дешёвые | Новые
-const resultsHeadElement = document.querySelector('.results__head');
-render(resultsHeadElement, new SortingOrderView().getElement(), RenderPosition.BEFOREEND);
-
-//Сортировка товаров по избранному
-const fromElement = document.querySelector('.sorting__form');
-render(fromElement, new SortingFavoritesView().getElement(), RenderPosition.BEFOREEND);
-
-//Вывод списка товаров
-render(resultsElement, new ResultsListView().getElement(), RenderPosition.BEFOREEND);
-const resultsListElement = document.querySelector('.results__list');
-
-if (products.length === 0) {
-    render(resultsListElement, new NoProductsView().getElement(), RenderPosition.BEFOREEND);
-} else {
-    for (let i = 0; i < PRODUCT_COUNT; i++) {
-        renderProduct(resultsListElement, products[i]);
-    }
-}
+renderBoard(products);
