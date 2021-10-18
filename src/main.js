@@ -24,23 +24,22 @@ import NoProductsView from "./view/no-products";
 const PRODUCT_COUNT = 10;
 
 const products = new Array(PRODUCT_COUNT).fill().map(createProduct);
-const productModalComponent = new ProductModalView();
 
 const renderProduct = (resultsListElement, product) => {
     const productComponent = new ProductView(product);
-    productModalComponent.init(product);
+    const productModalComponent = new ProductModalView(product);
 
     const productTitleElement = productComponent.getElement().querySelector('.product__title');
     const productImageElement = productComponent.getElement().querySelector('.product__image');
-    const productModalElement = document.querySelector('.popup');
-    const popupCloseElement = productModalElement.querySelector('.popup__close');
+    const popupCloseElement = productModalComponent.getElement().querySelector('.popup__close');
 
     const replaceCardToModal = () => {
-        productModalElement.style.display = 'block';
+        productModalComponent.getElement().style.display = 'block';
+        render(mainElement, productModalComponent.getElement(), RenderPosition.BEFOREEND);
     };
 
     const replaceModalToCard = () => {
-        productModalElement.style.display = 'none';
+        productModalComponent.getElement().style.display = 'none';
     };
 
     const onEscKeyDown = (evt) => {
@@ -66,9 +65,9 @@ const renderProduct = (resultsListElement, product) => {
         document.removeEventListener('keydown', onEscKeyDown);
     });
 
-
     render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
 }
+
 const renderBoard = (products) => {
     //Результаты
     const resultsElement = document.querySelector('.onlineshop-app__results');
@@ -94,11 +93,8 @@ const renderBoard = (products) => {
         }
     }
 }
-
 const mainElement = document.querySelector('main');
 render(mainElement, new AppView().getElement(), RenderPosition.AFTERBEGIN);
-render(mainElement, productModalComponent.getElement(), RenderPosition.BEFOREEND);
-
 
 const appWrapperElement = document.querySelector('.onlineshop-app__wrapper');
 render(appWrapperElement, new AppFilterView().getElement(), RenderPosition.AFTERBEGIN);
