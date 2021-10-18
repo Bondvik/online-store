@@ -80,8 +80,12 @@ const createProductModalTemplate = (product) => {
 }
 
 export default class ProductModalView {
-    constructor(product) {
+    constructor() {
         this._element = null;
+        this._product = null;
+    }
+
+    init(product) {
         this._product = product;
     }
 

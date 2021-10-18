@@ -23,19 +23,39 @@ import ProductModalView from "./view/product-modal";
 const PRODUCT_COUNT = 5;
 
 const products = new Array(PRODUCT_COUNT).fill().map(createProduct);
+const productModalComponent = new ProductModalView();
 
 const renderProduct = (resultsListElement, product) => {
     const productComponent = new ProductView(product);
-    const productModalComponent = new ProductModalView(product);
+    productModalComponent.init(product);
+
+    const productTitleElement = productComponent.getElement().querySelector('.product__title');
+    const productImageElement = productComponent.getElement().querySelector('.product__image');
+
+    const replaceCardToModal = () => {
+        const productModalElement = document.querySelector('.popup');
+        productModalElement.style.display = 'block';
+    }
+
+    productTitleElement.addEventListener('click', (evt) => {
+        replaceCardToModal();
+    })
+
+    productImageElement.addEventListener('click', (evt) => {
+        replaceCardToModal();
+    })
+
     render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
 }
 
 const mainElement = document.querySelector('main');
 render(mainElement, new AppView().getElement(), RenderPosition.AFTERBEGIN);
+render(mainElement, productModalComponent.getElement(), RenderPosition.BEFOREEND);
 
 const appWrapperElement = document.querySelector('.onlineshop-app__wrapper');
 render(appWrapperElement, new AppFilterView().getElement(), RenderPosition.AFTERBEGIN);
 render(appWrapperElement, new AppResultsView().getElement(), RenderPosition.BEFOREEND);
+
 
 //Фильтр
 const filterFormElement = document.querySelector('.filter__form');
@@ -70,3 +90,4 @@ const resultsListElement = document.querySelector('.results__list');
 for (let i = 0; i < PRODUCT_COUNT; i++) {
     renderProduct(resultsListElement, products[i]);
 }
+
