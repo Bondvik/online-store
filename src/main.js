@@ -19,8 +19,9 @@ import SortingFavoritesView from "./view/sorting-favorites";
 import ResultsListView from "./view/results-list";
 import ProductView from "./view/product";
 import ProductModalView from "./view/product-modal";
+import NoProductsView from "./view/no-products";
 
-const PRODUCT_COUNT = 5;
+const PRODUCT_COUNT = 10;
 
 const products = new Array(PRODUCT_COUNT).fill().map(createProduct);
 const productModalComponent = new ProductModalView();
@@ -36,11 +37,11 @@ const renderProduct = (resultsListElement, product) => {
 
     const replaceCardToModal = () => {
         productModalElement.style.display = 'block';
-    }
+    };
 
     const replaceModalToCard = () => {
         productModalElement.style.display = 'none';
-    }
+    };
 
     const onEscKeyDown = (evt) => {
         if (evt.key === 'Escape' || evt.key === 'Esc') {
@@ -53,17 +54,18 @@ const renderProduct = (resultsListElement, product) => {
     productTitleElement.addEventListener('click', (evt) => {
         replaceCardToModal();
         document.addEventListener('keydown', onEscKeyDown);
-    })
+    });
 
     productImageElement.addEventListener('click', (evt) => {
         replaceCardToModal();
         document.addEventListener('keydown', onEscKeyDown);
-    })
+    });
 
     popupCloseElement.addEventListener('click', (evt) => {
         replaceModalToCard();
         document.removeEventListener('keydown', onEscKeyDown);
-    })
+    });
+
 
     render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
 }
@@ -107,7 +109,11 @@ render(fromElement, new SortingFavoritesView().getElement(), RenderPosition.BEFO
 //Вывод списка товаров
 render(resultsElement, new ResultsListView().getElement(), RenderPosition.BEFOREEND);
 const resultsListElement = document.querySelector('.results__list');
-for (let i = 0; i < PRODUCT_COUNT; i++) {
-    renderProduct(resultsListElement, products[i]);
-}
 
+if (products.length === 0) {
+    render(resultsListElement, new NoProductsView().getElement(), RenderPosition.BEFOREEND);
+} else {
+    for (let i = 0; i < PRODUCT_COUNT; i++) {
+        renderProduct(resultsListElement, products[i]);
+    }
+}
