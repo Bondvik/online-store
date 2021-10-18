@@ -32,6 +32,7 @@ const renderProduct = (resultsListElement, product) => {
     const productTitleElement = productComponent.getElement().querySelector('.product__title');
     const productImageElement = productComponent.getElement().querySelector('.product__image');
     const productModalElement = document.querySelector('.popup');
+    const popupCloseElement = productModalElement.querySelector('.popup__close');
 
     const replaceCardToModal = () => {
         productModalElement.style.display = 'block';
@@ -39,7 +40,6 @@ const renderProduct = (resultsListElement, product) => {
 
     const replaceModalToCard = () => {
         productModalElement.style.display = 'none';
-        document.removeEventListener('keydown', onEscKeyDown);
     }
 
     const onEscKeyDown = (evt) => {
@@ -58,6 +58,11 @@ const renderProduct = (resultsListElement, product) => {
     productImageElement.addEventListener('click', (evt) => {
         replaceCardToModal();
         document.addEventListener('keydown', onEscKeyDown);
+    })
+
+    popupCloseElement.addEventListener('click', (evt) => {
+        replaceModalToCard();
+        document.removeEventListener('keydown', onEscKeyDown);
     })
 
     render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
