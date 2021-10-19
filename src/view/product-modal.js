@@ -1,6 +1,19 @@
 import {createElement} from "../utils/render";
 import {getPublishDate} from "../utils/date";
 import {getPrice} from "../utils/product";
+import * as L from 'leaflet';
+
+const OSM_ATTRIBUTION = `&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>`;
+
+const activeIcon = L.icon({
+    iconUrl: `/img/pin-active.svg`,
+    iconSize: [20, 30],
+});
+const tileLayer = L.tileLayer(
+    `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: OSM_ATTRIBUTION,
+    },
+);
 
 const createPhotosTemplate = (name, photos) => {
     return photos.reduce((accum, currentValue) => {
@@ -71,9 +84,7 @@ const createProductModalTemplate = (product) => {
                               </div>
                         </div>
                         <div class="popup__right">
-                              <div class="popup__map">
-                                <img src="img/map.jpg" width="268" height="180" alt="Москва, Нахимовский проспект, дом 5">
-                              </div>
+                              <div class="popup__map" id="map"></div>
                               <div class="popup__address">${city}, ${street}, ${(building) ? building: ''}</div>
                         </div>
                     </div>
@@ -83,9 +94,25 @@ const createProductModalTemplate = (product) => {
 }
 
 export default class ProductModalView {
-    constructor(product = {}) {
+    constructor(product) {
         this._element = null;
         this._product = product;
+        this.map = null;
+        this.closeModalClickHandler = this.closeModalClickHandler.bind(this);
+    }
+
+    renderMap() {
+        const element = this.getElement().querySelector(`#map`);
+        const {coordinates} = this._product;
+        setTimeout(() => {
+            this.map = L.map(element, {
+                center: coordinates,
+                zoom: 14,
+                layers: [tileLayer],
+                marker: true,
+            });
+            L.marker(coordinates, {icon: activeIcon}).addTo(this.map);
+        },0);
     }
 
     getTemplate() {
@@ -97,6 +124,16 @@ export default class ProductModalView {
             this._element = createElement(this.getTemplate());
         }
         return this._element;
+    }
+
+    closeModal() {
+        this.map.remove();
+        this.getElement().querySelector(`.popup__close`).removeEventListener(`click`, this.closeModalClickHandler);
+    }
+
+    closeModalClickHandler(evt) {
+        evt.preventDefault();
+        this.closeModal();
     }
 
     removeElement() {

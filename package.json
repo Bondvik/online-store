@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Bondvik/online-store#readme",
   "dependencies": {
     "dayjs": "^1.10.7",
+    "leaflet": "^1.7.1",
     "nanoid": "^3.1.29",
     "nouislider": "^15.4.0",
     "webpack": "^5.56.1",

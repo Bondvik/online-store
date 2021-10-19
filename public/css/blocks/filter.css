@@ -14,7 +14,9 @@
   margin-bottom: 17px;
 }
 
-
+.price-range__value {
+  display: none;
+}
 
 .filter fieldset {
   margin-left: 0;
@@ -216,7 +218,7 @@
 
   position: absolute;
   left: 0px;
-  
+
   width: 24px;
   height: 24px;
   background-image: url("../../img/icon-tick.svg");
@@ -227,7 +229,7 @@
 }
 
 .filter__checkboxes-list input:checked + label::before {
- 
+
   background-color: var(--dark-blue);
 
   width: 24px;
@@ -273,7 +275,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     display: none;
     -webkit-appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 
 .filter__min-square input:focus::placeholder {
@@ -450,7 +452,7 @@ input::-webkit-inner-spin-button {
 
 .filter__type--car-body {
 margin-bottom: 22px;
-}  
+}
 
 .filter__ram-list {
   display: flex;
@@ -482,6 +484,8 @@ margin-bottom: 22px;
   flex-grow: 1;
 }
 
-.price-range__value {
-  display: none;
-}
+/*.filter__category-filters {*/
+/*  position: fixed;*/
+/*  z-index: 100;*/
+/*  width: 345px;*/
+/*}*/

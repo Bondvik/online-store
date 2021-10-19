@@ -1,5 +1,5 @@
 import {RenderPosition} from "./constants";
-import {render} from "./utils/render";
+import {render, remove} from "./utils/render";
 import {createProduct} from "./data";
 import AppView from "./view/app";
 
@@ -34,12 +34,13 @@ const renderProduct = (resultsListElement, product) => {
     const popupCloseElement = productModalComponent.getElement().querySelector('.popup__close');
 
     const replaceCardToModal = () => {
-        productModalComponent.getElement().style.display = 'block';
-        render(mainElement, productModalComponent.getElement(), RenderPosition.BEFOREEND);
+        productModalComponent.renderMap();
+        render(onlineShopAppElement, productModalComponent.getElement(), RenderPosition.BEFOREEND);
     };
 
     const replaceModalToCard = () => {
-        productModalComponent.getElement().style.display = 'none';
+        productModalComponent.closeModal();
+        remove(productModalComponent);
     };
 
     const onEscKeyDown = (evt) => {
@@ -50,20 +51,19 @@ const renderProduct = (resultsListElement, product) => {
         }
     };
 
-    productTitleElement.addEventListener('click', (evt) => {
+    const onClickTitleAndImage = () => {
         replaceCardToModal();
         document.addEventListener('keydown', onEscKeyDown);
-    });
+    }
 
-    productImageElement.addEventListener('click', (evt) => {
-        replaceCardToModal();
-        document.addEventListener('keydown', onEscKeyDown);
-    });
-
-    popupCloseElement.addEventListener('click', (evt) => {
+    const onClickClosePopup = () => {
         replaceModalToCard();
         document.removeEventListener('keydown', onEscKeyDown);
-    });
+    }
+
+    productTitleElement.addEventListener('click', onClickTitleAndImage);
+    productImageElement.addEventListener('click', onClickTitleAndImage);
+    popupCloseElement.addEventListener('click', onClickClosePopup);
 
     render(resultsListElement, productComponent.getElement(), RenderPosition.BEFOREEND);
 }
@@ -97,6 +97,7 @@ const mainElement = document.querySelector('main');
 render(mainElement, new AppView().getElement(), RenderPosition.AFTERBEGIN);
 
 const appWrapperElement = document.querySelector('.onlineshop-app__wrapper');
+const onlineShopAppElement = document.querySelector('.onlineshop-app');
 render(appWrapperElement, new AppFilterView().getElement(), RenderPosition.AFTERBEGIN);
 render(appWrapperElement, new AppResultsView().getElement(), RenderPosition.BEFOREEND);
 
