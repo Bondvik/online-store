@@ -1,6 +1,7 @@
 import {createElement} from "../utils/render";
 import {getPublishDate} from "../utils/date";
 import {getPrice} from "../utils/product";
+import {getFilterValues, getFilterName} from "../constants";
 import * as L from 'leaflet';
 
 const OSM_ATTRIBUTION = `&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>`;
@@ -24,8 +25,20 @@ const createPhotosTemplate = (name, photos) => {
     }, '');
 }
 
+const createCharsItem = (category, filters) => {
+    return (
+        Object.entries(getFilterName(category)).reduce((accum, [key, value]) => {
+            accum += `<li class="chars__item">
+                        <div class="chars__name">${value}</div>
+                        <div class="chars__value">${getFilterValues(category, filters[key])}</div>
+                    </li>`
+            return accum;
+        }, '')
+    )
+}
+
 const createProductModalTemplate = (product) => {
-    const {name, price, description, address, photos, publishDate, seller, isFavorite} = product;
+    const {name, price, description, address, photos, publishDate, seller, isFavorite, category, filters} = product;
     const {fullname, rating} = seller;
     const {city, street, building} = address;
     return (
@@ -58,18 +71,7 @@ const createProductModalTemplate = (product) => {
                                 </ul>
                               </div>
                               <ul class="popup__chars chars">
-                                <li class="chars__item">
-                                  <div class="chars__name">Год выпуска</div>
-                                  <div class="chars__value">1999</div>
-                                </li>
-                                <li class="chars__item">
-                                  <div class="chars__name">Коробка передач</div>
-                                  <div class="chars__value">механическая</div>
-                                </li>
-                                <li class="chars__item">
-                                  <div class="chars__name">Тип кузова</div>
-                                  <div class="chars__value">внедорожник</div>
-                                </li>
+                                ${createCharsItem(category, filters)}
                               </ul>
                               <div class="popup__seller seller seller--good">
                                 <h3>Продавец</h3>
@@ -107,7 +109,7 @@ export default class ProductModalView {
         setTimeout(() => {
             this.map = L.map(element, {
                 center: coordinates,
-                zoom: 14,
+                zoom: 15,
                 layers: [tileLayer],
                 marker: true,
             });
