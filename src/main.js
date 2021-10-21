@@ -35,6 +35,7 @@ const renderProduct = (resultsListElement, product) => {
 
     const replaceCardToModal = () => {
         productModalComponent.renderMap();
+        productModalComponent.renderGallery();
         render(onlineShopAppElement, productModalComponent.getElement(), RenderPosition.BEFOREEND);
     };
 

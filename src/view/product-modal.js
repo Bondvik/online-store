@@ -55,18 +55,15 @@ const createProductModalTemplate = (product) => {
                     <div class="popup__columns">
                         <div class="popup__left">
                               <div class="popup__gallery gallery">
-                                <button class="gallery__favourite fav-add">
+                                <button class="gallery__favourite fav-add ${isFavorite ? 'fav-add--checked' : ''}">
                                   <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M3 7C3 13 10 16.5 11 17C12 16.5 19 13 19 7C19 4.79086 17.2091 3 15 3C12 3 11 5 11 5C11 5 10 3 7 3C4.79086 3 3 4.79086 3 7Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
                                   </svg>
                                 </button>
-                                <div class="gallery__main-pic">
-                                  <img src="${photos[0]}" srcset="${photos[0]} 2x" width="520" height="340" alt="Ford Mustang 2020">
+                                <div class="gallery__main-pic"">
+                                  <img src="${photos[0]}" srcset="${photos[0]} 2x" width="520" height="340" alt="${name}">
                                 </div>
                                 <ul class="gallery__list">
-<!--                                  <li class="gallery__item gallery__item&#45;&#45;active">-->
-<!--                                    <img src="img/car1.jpg" srcset="img/car1-2x.jpg 2x" alt="Ford Mustang 2020" width="124" height="80">-->
-<!--                                  </li>-->
                                  ${createPhotosTemplate(name, photos)}
                                 </ul>
                               </div>
@@ -115,6 +112,29 @@ export default class ProductModalView {
             });
             L.marker(coordinates, {icon: activeIcon}).addTo(this.map);
         },0);
+    }
+
+    renderGallery() {
+        const galleryListElement = this.getElement().querySelector(`.gallery__list`);
+        const galleryMainPic = this.getElement().querySelector(`.gallery__main-pic`);
+        const imgItemsElement = this.getElement().querySelectorAll('.gallery__item');
+
+        galleryListElement.addEventListener('click', (evt) => {
+            imgItemsElement.forEach((item) => {
+                item.classList.remove('gallery__item--active');
+            });
+            if (!evt.target.parentElement.classList.contains('gallery__item')) {
+                return
+            }
+            evt.target.parentElement.classList.add('gallery__item--active');
+            galleryMainPic.innerHTML = '';
+
+            const img = new Image(520, 340);
+            img.src = evt.target.src;
+            img.srcset = evt.target.srcset;
+            img.alt = evt.target.alt;
+            galleryMainPic.append(img);
+        })
     }
 
     getTemplate() {
