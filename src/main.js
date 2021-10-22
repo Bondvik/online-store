@@ -28,6 +28,7 @@ const products = new Array(PRODUCT_COUNT).fill().map(createProduct);
 const renderProduct = (resultsListElement, product) => {
     const productComponent = new ProductView(product);
     const productModalComponent = new ProductModalView(product);
+    productComponent.getActivePhoto();
 
     const productTitleElement = productComponent.getElement().querySelector('.product__title');
     const productImageElement = productComponent.getElement().querySelector('.product__image');

@@ -2,10 +2,18 @@ import {getPublishDate} from "../utils/date";
 import {getPrice} from "../utils/product";
 import {createElement} from "../utils/render";
 
+const NAVIGATION_PHOTOS_COUNT = 5;
+
+const createProductNavigation = (photos) => {
+    return photos.slice(0, NAVIGATION_PHOTOS_COUNT).reduce((accum, photo, index) => {
+        accum += `<div class="product__navigation-column" data-photo-index="${index}"><span></span></div>`
+        return accum;
+    }, '')
+}
+
 const createProductTemplate = (product) => {
     const {name, price, address, photos, publishDate, isFavorite} = product;
     const {city, street} = address;
-    const isPhotos = photos.length > 1 ? `+${photos.length - 1} фото` : '';
     return (
         `<li class="results__item product">
             <button class="product__favourite fav-add ${isFavorite ? 'fav-add--checked' : ''}" type="button" aria-label="Добавить в избранное">
@@ -14,15 +22,11 @@ const createProductTemplate = (product) => {
                 </svg>
             </button>
             <div class="product__image">
-                <div class="product__image-more-photo hidden">${isPhotos}</div>
-                <img src="${photos[0]}" srcset="${photos[0]} 2x" class="product-image" alt="${name}">
+                <div class="product__image-more-photo hidden"></div>
                     <div class="product__image-navigation">
-                        <span class="product__navigation-item product__navigation-item--active"></span>
-                        <span class="product__navigation-item"></span>
-                        <span class="product__navigation-item"></span>
-                        <span class="product__navigation-item"></span>
-                        <span class="product__navigation-item"></span>
+                        ${createProductNavigation(photos)}
                     </div>
+                <img src="${photos[0]}" srcset="${photos[0]} 2x" class="product-image" alt="${name}">
             </div>
             <div class="product__content">
                 <h3 class="product__title">
@@ -40,6 +44,9 @@ export default class ProductView {
     constructor(product) {
         this._element = null;
         this._product = product;
+
+        this.morePhotoElement = this.getElement().querySelector(`.product__image-more-photo`);
+        this.hideMorePhotos = this.hideMorePhotos.bind(this);
     }
 
     getTemplate() {
@@ -55,5 +62,41 @@ export default class ProductView {
 
     removeElement() {
         this._element = null;
+    }
+
+    showMorePhotos() {
+        const photosCount = this._product.photos.length;
+        if (photosCount > NAVIGATION_PHOTOS_COUNT) {
+            this.morePhotoElement.classList.remove(`hidden`);
+            this.morePhotoElement.innerText = `+${photosCount - NAVIGATION_PHOTOS_COUNT} фото`;
+        }
+    }
+
+    hideMorePhotos() {
+        this.morePhotoElement.classList.add(`hidden`);
+    }
+
+    getActivePhoto() {
+        const productImageNavigation = this.getElement().querySelector('.product__image-navigation');
+        const productImage = this.getElement().querySelector('.product__image img');
+
+        productImageNavigation.addEventListener('mousemove', (evt) => {
+            const photoIndex = Number(evt.target.dataset.photoIndex);
+            const activePhoto = this._product.photos[photoIndex];
+
+            if (!activePhoto) {
+                return
+            }
+
+            if (evt.target.classList.contains('product__navigation-column')) {
+                productImage.setAttribute(`src`, activePhoto);
+                productImage.setAttribute(`srcset`, activePhoto);
+            }
+
+            if (photoIndex === (NAVIGATION_PHOTOS_COUNT - 1)) {
+                this.showMorePhotos();
+                evt.target.addEventListener(`mouseout`, this.hideMorePhotos);
+            }
+        })
     }
 }
